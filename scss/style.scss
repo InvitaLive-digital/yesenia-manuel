@@ -556,8 +556,11 @@ $border-width: 2px;
 body.intro-page {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background: linear-gradient(to bottom, #f7edff, #f4e8fa);
+    font-family: $font-family-sans-serif;
+    background: 
+    url('../img/iniciales.png') no-repeat top center,  // tu imagen
+    $primary; 
+    background-size: 80%;
     min-height: 100vh;
     display: flex;
     align-items: center;
@@ -570,10 +573,17 @@ body.intro-page {
     width: 90%;
 }
 
-.titulo-invitacion {
-    font-size: 2.5rem;
-    color: #6a1b9a;
-    margin-bottom: 2rem;
+.titulo-invitacion_fila1 {
+    font-size: 1.5rem;
+    color: $light;
+    font-family: 'Minion';
+}
+.titulo-invitacion_fila2 {
+    font-size: 2.7rem;
+    color: $light;
+    font-family: 'MeowScript';
+    margin-top: -20px;
+    font-weight: 100!important;
 }
 
 .envelope-btn {
@@ -595,11 +605,11 @@ body.intro-page {
 .click-text {
     margin-top: 1rem;
     font-size: 1.8rem;
-    color: #6a1b9a;
+    color: $secondary;
     font-weight: 600;
     animation: pulse 1.8s infinite;
     font-family: 'Great Vibes', cursive;
-    ;
+    background-color: $light;
 }
 
 @keyframes pulse {
@@ -729,5 +739,32 @@ body.intro-page {
       text-transform: none;
       font-size: 2.5rem;
       margin: 0 0.25rem;
+    }
+  }
+
+  .text-sobre{
+    color:$light
+  }
+  .click-box {
+    display: inline-block;
+    background: $light;       // fondo crema (ajústalo a tu paleta)
+    padding: 0.3rem 1.25rem;
+    border-radius: 8px;
+    font-family: 'Minion';
+    font-size: 1.2rem;
+    color: $secondary;         // verde oscuro de tu paleta
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  
+    .click-word {
+      font-family: 'MeowScript'!important;
+      font-weight: 100;
+      color: $primary; 
+      font-size: 2rem;        // rojo/rosado de tu paleta
+    }
+  
+    &:hover {
+      transform: translateY(-3px);
+      cursor: pointer;
     }
   }

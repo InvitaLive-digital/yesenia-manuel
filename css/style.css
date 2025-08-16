@@ -9421,8 +9421,9 @@ a.text-dark:hover, a.text-dark:focus {
 body.intro-page {
   margin: 0;
   padding: 0;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(to bottom, #f7edff, #f4e8fa);
+  font-family: "Montserrat", sans-serif;
+  background: url("../img/iniciales.png") no-repeat top center, #b86461;
+  background-size: 80%;
   min-height: 100vh;
   display: flex;
   align-items: center;
@@ -9435,10 +9436,18 @@ body.intro-page {
   width: 90%;
 }
 
-.titulo-invitacion {
-  font-size: 2.5rem;
-  color: #6a1b9a;
-  margin-bottom: 2rem;
+.titulo-invitacion_fila1 {
+  font-size: 1.5rem;
+  color: #F9ECDE;
+  font-family: "Minion";
+}
+
+.titulo-invitacion_fila2 {
+  font-size: 2.7rem;
+  color: #F9ECDE;
+  font-family: "MeowScript";
+  margin-top: -20px;
+  font-weight: 100 !important;
 }
 
 .envelope-btn {
@@ -9460,10 +9469,11 @@ body.intro-page {
 .click-text {
   margin-top: 1rem;
   font-size: 1.8rem;
-  color: #6a1b9a;
+  color: #4B5C49;
   font-weight: 600;
   animation: pulse 1.8s infinite;
   font-family: "Great Vibes", cursive;
+  background-color: #F9ECDE;
 }
 
 @keyframes pulse {
@@ -9577,6 +9587,32 @@ body.intro-page {
   text-transform: none;
   font-size: 2.5rem;
   margin: 0 0.25rem;
+}
+
+.text-sobre {
+  color: #F9ECDE;
+}
+
+.click-box {
+  display: inline-block;
+  background: #F9ECDE;
+  padding: 0.3rem 1.25rem;
+  border-radius: 8px;
+  font-family: "Minion";
+  font-size: 1.2rem;
+  color: #4B5C49;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.click-box .click-word {
+  font-family: "MeowScript" !important;
+  font-weight: 100;
+  color: #b86461;
+  font-size: 2rem;
+}
+.click-box:hover {
+  transform: translateY(-3px);
+  cursor: pointer;
 }
 
 /*# sourceMappingURL=style.css.map */
