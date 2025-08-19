@@ -3,11 +3,10 @@
 //
 // Base styles
 //
-
 .btn {
   display: inline-block;
-  font-family: $btn-font-family;
-  font-weight: $btn-font-weight;
+  font-family: 'Minion'!important;
+  font-weight: 100!important;
   color: $body-color;
   text-align: center;
   text-decoration: if($link-decoration == none, null, none);
@@ -16,6 +15,7 @@
   user-select: none;
   background-color: transparent;
   border: $btn-border-width solid transparent;
+  border-radius: 10px!important;
   @include button-size($btn-padding-y, $btn-padding-x, $btn-font-size, $btn-line-height, $btn-border-radius);
   @include transition($btn-transition);
 

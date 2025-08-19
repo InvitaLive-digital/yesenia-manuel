@@ -5,8 +5,8 @@ $secondary: #4B5C49;
 $light: #F9ECDE;
 $dark: #b86461;
 $resalt: #4b596d;
-$white:#ffffff;
-$color-background:#F1E0CB;
+$white: #ffffff;
+$color-background: #F1E0CB;
 
 $font-family-sans-serif: 'Montserrat', sans-serif;
 
@@ -33,13 +33,14 @@ $border-width: 2px;
     src: url('../fonts/MeowScript-Regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
+}
+
 @font-face {
     font-family: 'Minion';
     src: url('../fonts/MinionVariableConcept-Roman.otf') format('truetype');
     font-weight: normal;
     font-style: normal;
-  }
+}
 
 /********** Template CSS ************/
 .font-secondary {
@@ -125,7 +126,7 @@ $border-width: 2px;
 
 .navbar-dark .navbar-nav .nav-link:hover,
 .navbar-dark .navbar-nav .nav-link.active {
-    color: $resalt;
+    color: $secondary;
 }
 
 @media (max-width: 991.98px) {
@@ -150,21 +151,21 @@ $border-width: 2px;
 .section-title::before {
     position: absolute;
     content: "";
-    width: 60px;
-    height: 2px;
+    width: 90px;
+    height: 1.5px;
     bottom: 11px;
-    left: calc(50% - 80px);
-    background: $resalt;
+    left: calc(50% - 110px);
+    background: $secondary;
 }
 
 .section-title::after {
     position: absolute;
     content: "";
-    width: 60px;
-    height: 2px;
+    width: 90px;
+    height: 1.5px;
     bottom: 11px;
-    right: calc(50% - 80px);
-    background: $resalt;
+    right: calc(50% - 110px);
+    background: $secondary;
 }
 
 .btn-play {
@@ -289,7 +290,7 @@ $border-width: 2px;
     animation: latido 1.2s infinite;
     transform-origin: center;
     display: inline-block;
-    /* importante para que escale bien */
+    color: $secondary;
 }
 
 @media (min-width: 220px) {
@@ -367,15 +368,14 @@ $border-width: 2px;
 }
 
 .bg-gallery {
-    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../img/familia_3d.png), no-repeat center center;
-    background-size: contain
+    background-color: $primary;
 }
 
 .gallery-carousel .owl-nav {
     position: absolute;
     width: 135px;
     height: 60px;
-    top: -90px;
+    top: -60px;
     left: calc(50% - 67px);
     display: flex;
     align-items: center;
@@ -390,9 +390,9 @@ $border-width: 2px;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: $resalt;
-    background: $light;
-    font-size: 30px;
+    color: $white;
+    background: transparent;
+    font-size: 20px;
 }
 
 /********** Music Button **********/
@@ -444,17 +444,11 @@ $border-width: 2px;
 
 #contact {
     p a {
-        color: $resalt !important;
+        color: $secondary !important;
         font-weight: 600;
     }
 }
 
-#navbar {
-    a span {
-        color: $resalt !important;
-        font-weight: 600;
-    }
-}
 
 #countdown-section {
     position: absolute;
@@ -462,26 +456,26 @@ $border-width: 2px;
     z-index: 10;
 
     #countdown {
-        background: $primary!important;
+        background: $primary !important;
         padding: 0.75rem 1rem;
         margin: auto;
     }
 
     #countdown h2 {
         font-size: 2.2rem;
-        color:$white!important
+        color: $white!important
     }
 
     #countdown p {
         font-size: 0.9rem;
-        color:$white!important
+        color: $white!important
     }
 }
 
 #countdown-section h1 {
     color: #ecdef4;
     font-size: 2.5rem;
-    font-family: 'Minion'!important;
+    font-family: 'Minion' !important;
 }
 
 .calendar-decorativo {
@@ -557,9 +551,9 @@ body.intro-page {
     margin: 0;
     padding: 0;
     font-family: $font-family-sans-serif;
-    background: 
-    url('../img/iniciales.png') no-repeat top center,  // tu imagen
-    $primary; 
+    background:
+        url('../img/iniciales.png') no-repeat top center, // tu imagen
+        $primary;
     background-size: 80%;
     min-height: 100vh;
     display: flex;
@@ -578,12 +572,13 @@ body.intro-page {
     color: $light;
     font-family: 'Minion';
 }
+
 .titulo-invitacion_fila2 {
     font-size: 2.7rem;
     color: $light;
     font-family: 'MeowScript';
     margin-top: -20px;
-    font-weight: 100!important;
+    font-weight: 100 !important;
 }
 
 .envelope-btn {
@@ -680,9 +675,10 @@ body.intro-page {
         left: 50%;
     }
 }
-.text-note{
+
+.text-note {
     font-size: 0.8rem;
-    padding-top: 0px!important;
+    padding-top: 0px !important;
     margin-bottom: 0px;
 }
 
@@ -693,78 +689,154 @@ body.intro-page {
     color: $color-background;
     margin: 2rem 0;
     font-family: 'Minion';
+
     &__date {
-      position: relative;
-      font-size: 2rem;
-      font-weight: 600;
-      display: inline-block;
-      margin-bottom: 0px!important;
+        position: relative;
+        font-size: 2rem;
+        font-weight: 600;
+        display: inline-block;
+        margin-bottom: 0px !important;
 
-      &::before,
-      &::after {
-        content: "";
-        position: absolute;
-        top: 50%;
-        width: 60px;      // largo de las líneas
-        height: 2.3px;      // grosor
-        background: $primary;
-      }
-  
-      &::before {
-        left: -70px; // distancia desde la fecha
-        transform: translateY(-50%);
-      }
-  
-      &::after {
-        right: -70px;
-        transform: translateY(-50%);
-      }
+        &::before,
+        &::after {
+            content: "";
+            position: absolute;
+            top: 50%;
+            width: 60px; // largo de las líneas
+            height: 2.3px; // grosor
+            background: $primary;
+        }
+
+        &::before {
+            left: -70px; // distancia desde la fecha
+            transform: translateY(-50%);
+        }
+
+        &::after {
+            right: -70px;
+            transform: translateY(-50%);
+        }
     }
-  
+
     &__text {
-      font-size: 1.5rem;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-      color:$primary!important;
-      font-weight: 600!important;
-      margin-top: -6px!important;
-      &--big {
-        color:$color-background!important;
-        margin-top: -30px!important;
-      }
-    }
-  
-    .script {
-      font-family: 'MeowScript';
-      text-transform: none;
-      font-size: 2.5rem;
-      margin: 0 0.25rem;
-    }
-  }
+        font-size: 1.5rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        color: $primary !important;
+        font-weight: 600 !important;
+        margin-top: -6px !important;
 
-  .text-sobre{
-    color:$light
-  }
-  .click-box {
+        &--big {
+            color: $color-background !important;
+            margin-top: -30px !important;
+        }
+    }
+
+    .script {
+        font-family: 'MeowScript';
+        text-transform: none;
+        font-size: 2.5rem;
+        margin: 0 0.25rem;
+    }
+}
+
+.text-sobre {
+    color: $light
+}
+
+.click-box {
     display: inline-block;
-    background: $light;       // fondo crema (ajústalo a tu paleta)
+    background: $light; // fondo crema (ajústalo a tu paleta)
     padding: 0.3rem 1.25rem;
     border-radius: 8px;
     font-family: 'Minion';
     font-size: 1.2rem;
-    color: $secondary;         // verde oscuro de tu paleta
+    color: $secondary; // verde oscuro de tu paleta
     text-align: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-  
+
     .click-word {
-      font-family: 'MeowScript'!important;
-      font-weight: 100;
-      color: $primary; 
-      font-size: 2rem;        // rojo/rosado de tu paleta
+        font-family: 'MeowScript' !important;
+        font-weight: 100;
+        color: $primary;
+        font-size: 2rem; // rojo/rosado de tu paleta
     }
-  
+
     &:hover {
-      transform: translateY(-3px);
-      cursor: pointer;
+        transform: translateY(-3px);
+        cursor: pointer;
     }
+}
+
+.titulo-seccion {
+    font-family: 'Minion';
+    /* fuente elegante */
+    font-size: 20px;
+    font-weight: 200;
+    color: #e58b8b;
+    /* tono rosado similar al de la imagen */
+}
+
+.titulo-seccion .cursiva {
+    font-family: 'MeowScript' !important;
+    /* estilo manuscrito */
+    font-size: 2.5rem;
+    font-weight: 100 !important;
+    padding-right: 0.5rem;
+}
+
+.text-title {
+    color: $secondary;
+}
+
+#event, #section {
+    background-color: $light;
+}
+
+.icon-title {
+    max-width: 100px;
+}
+
+.title-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'MeowScript'; /* estilo manuscrito */
+    font-size: 2.5rem;
+    color: $primary; /* tono rosado */
+  }
+  
+  .title-section::before,
+  .title-section::after {
+    content: "";
+    width: 40px;                /* controla el largo de la línea */
+    border-bottom: 1.5px solid $secondary;  /* más grosor y color */
+    margin: 0 10px; 
+  }
+
+  .title-galery {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Minion'; /* estilo manuscrito */
+    font-size: 1.7rem;
+    font-weight: 100;
+    color: $white; /* tono rosado */
+  }
+  .title-galery .cursiva {
+    font-family: 'MeowScript' !important;
+    /* estilo manuscrito */
+    font-size: 2.5rem;
+    padding-left: 0.5rem;
+}
+  .title-galery::before,
+  .title-galery::after {
+    content: "";
+    width: 40px;                /* controla el largo de la línea */
+    border-bottom: 1.5px solid $white;  /* más grosor y color */
+    margin: 0 10px; 
+  }
+
+  .text-black{
+    color:#000000 
   }
