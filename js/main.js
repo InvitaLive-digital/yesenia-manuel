@@ -480,7 +480,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     <div class="form-row">
                         <div class="form-group col-sm-6">
                             <input name="nombre" required type="text"
-                                class="form-control border-2 py-4 px-3" 
+                                class="form-control border-2 py-4 px-3 " 
                                 placeholder="Tu nombre completo">
                         </div>
                         <div class="form-group col-sm-6">

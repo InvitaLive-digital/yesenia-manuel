@@ -9438,13 +9438,15 @@ a.text-transparent:hover, a.text-transparent:focus {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  background: #F9ECDE;
+  background: #ffffff;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: transform 0.3s, background 0.3s;
   z-index: 9999;
+  border: none;
+  outline: none;
 }
 .music-button img {
   width: 28px;
@@ -9455,7 +9457,7 @@ a.text-transparent:hover, a.text-transparent:focus {
   transform: scale(1.1);
 }
 .music-button.active img {
-  filter: invert(1);
+  filter: brightness(0) invert(1);
   animation: pulse 1s infinite ease-in-out;
 }
 
@@ -9893,7 +9895,8 @@ body.intro-page {
   transition: all 0.3s ease;
 }
 
-.attendance-btn:hover, .attendance-btn:focus {
+.attendance-btn:hover,
+.attendance-btn:focus {
   background: rgba(255, 255, 255, 0.3);
   color: white;
   border-color: rgba(255, 255, 255, 0.6);
@@ -9948,6 +9951,10 @@ body.intro-page {
   color: white;
   margin-bottom: 15px;
   font-size: 0.9rem;
+}
+
+.form-control {
+  border-radius: 10px;
 }
 
 /*# sourceMappingURL=style.css.map */

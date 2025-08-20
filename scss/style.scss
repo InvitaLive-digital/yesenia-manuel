@@ -2,7 +2,7 @@
 
 $primary: #b86461;
 $secondary: #4B5C49;
-$tertiary:#394937;
+$tertiary: #394937;
 $light: #F9ECDE;
 $dark: #b86461;
 $resalt: #4b596d;
@@ -10,21 +10,13 @@ $white: #ffffff;
 $color-background: #F1E0CB;
 
 $font-family-sans-serif: 'Montserrat', sans-serif;
-
 $headings-font-weight: 400;
-
 $body-bg: $white;
-
 $body-color: #6c757d;
-
 $headings-color: $dark;
-
 $headings-font-weight: 600;
-
 $enable-responsive-font-sizes: true;
-
 $enable-rounded: false;
-
 $border-width: 1px;
 
 @import "bootstrap/scss/bootstrap";
@@ -419,14 +411,15 @@ $border-width: 1px;
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: $light;
+    background: $white;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     transition: transform 0.3s, background 0.3s;
     z-index: 9999;
-
+    border: none;
+    outline: none;
     img {
         width: 28px;
         transition: filter 0.3s;
@@ -437,7 +430,7 @@ $border-width: 1px;
         transform: scale(1.1);
 
         img {
-            filter: invert(1);
+            filter: brightness(0) invert(1);
             animation: pulse 1s infinite ease-in-out;
         }
     }
@@ -894,77 +887,82 @@ body.intro-page {
 
 /*Estilos formulario
   /* NUEVOS ESTILOS MÍNIMOS - Solo lo necesario */
-        .attendance-selector {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 20px;
-            margin-bottom: 25px;
-            text-align: center;
-        }
-        
-        .attendance-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.4);
-            color: white;
-            padding: 12px 30px;
-            margin: 8px;
-            border-radius: 25px;
-            transition: all 0.3s ease;
-        }
-        
-        .attendance-btn:hover, .attendance-btn:focus {
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-            border-color: rgba(255, 255, 255, 0.6);
-        }
-        
-        .attendance-btn.active {
-            background: $primary;
-            border-color: $light;
-        }
-        
-        .guest-counter-section {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-        
-        .counter-btn {
-            background: rgba(255, 255, 255, 0.2);
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            color: white;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin: 0 15px;
-        }
-        
-        .counter-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            color: white;
-        }
-        
-        .guest-count-display {
-            background: white;
-            color: #333;
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 1.2rem;
-        }
-        
-        .guest-field-group {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 15px;
-        }
-        
-        .guest-field-group h6 {
-            color: white;
-            margin-bottom: 15px;
-            font-size: 0.9rem;
-        }
+.attendance-selector {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.attendance-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    color: white;
+    padding: 12px 30px;
+    margin: 8px;
+    border-radius: 25px;
+    transition: all 0.3s ease;
+}
+
+.attendance-btn:hover,
+.attendance-btn:focus {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+    border-color: rgba(255, 255, 255, 0.6);
+}
+
+.attendance-btn.active {
+    background: $primary;
+    border-color: $light;
+}
+
+.guest-counter-section {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.counter-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 15px;
+}
+
+.counter-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    color: white;
+}
+
+.guest-count-display {
+    background: white;
+    color: #333;
+    padding: 8px 20px;
+    border-radius: 20px;
+    font-weight: bold;
+    font-size: 1.2rem;
+}
+
+.guest-field-group {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 15px;
+}
+
+.guest-field-group h6 {
+    color: white;
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.form-control {
+    border-radius: 10px;
+}
