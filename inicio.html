@@ -300,10 +300,12 @@
                     <h4 class="title-uploadPhoto">Comparte tus <span class="cursiva">Fotos</span></h4>
                     <p class="font-weight-normal">¡Sube fotos de la boda al album!
                     </p>
-                    <a href="https://drive.google.com/drive/folders/1DyR1KbolSW0Dv2by4pYchdKC8M4syML_?usp=sharing" target="_blank"
-                        class="btn btn-transparent border-white font-weight-bold px-5 mt-4">SUBIR FOTO</a>
-                    <a href="https://drive.google.com/drive/folders/1DyR1KbolSW0Dv2by4pYchdKC8M4syML_?usp=sharing" target="_blank"
-                        class="btn btn-transparent border-white font-weight-bold px-5 mt-4">VER ÁLBUM</a>
+                    <a href="https://drive.google.com/drive/folders/1DyR1KbolSW0Dv2by4pYchdKC8M4syML_?usp=sharing"
+                        target="_blank" class="btn btn-transparent border-white font-weight-bold px-5 mt-4">SUBIR
+                        FOTO</a>
+                    <a href="https://drive.google.com/drive/folders/1DyR1KbolSW0Dv2by4pYchdKC8M4syML_?usp=sharing"
+                        target="_blank" class="btn btn-transparent border-white font-weight-bold px-5 mt-4">VER
+                        ÁLBUM</a>
                 </div>
                 <div class="col-md-12  text-center  animate-on-scroll">
                     <div class="position-relative text-center animate-on-scroll">
@@ -366,11 +368,11 @@
                 </div>
             </div>
         </div> -->
-    <div class="row justify-content-center animate-on-scroll">
+        <div class="row justify-content-center animate-on-scroll">
             <div class="col-lg-8">
                 <div class="text-center">
                     <form id="rsvpForm">
-                        
+
                         <!-- NUEVO: Selector de asistencia -->
                         <div class="attendance-selector">
                             <h6 class="text-light mb-3">¿Podrás acompañarnos?</h6>
@@ -424,7 +426,27 @@
         </div>
     </div>
     <!-- RSVP End -->
-
+    <!-- Modal de Validación -->
+    <div class="modal fade" id="validationModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <h5>¡Atención!</h5>
+                    <p>Por favor, cuéntanos si podrás acompañarnos en este día tan especial. 💕</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">
+                        CONTINUAR
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5 animate-on-scroll" id="contact">

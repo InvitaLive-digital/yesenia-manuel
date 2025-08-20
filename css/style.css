@@ -5154,6 +5154,7 @@ a.close.disabled {
   background-color: #ffffff;
   background-clip: padding-box;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
   outline: 0;
 }
 
@@ -5178,7 +5179,6 @@ a.close.disabled {
   align-items: flex-start;
   justify-content: space-between;
   padding: 1rem 1rem;
-  border-bottom: 1px solid #dee2e6;
 }
 .modal-header .close {
   padding: 1rem 1rem;
@@ -5202,7 +5202,6 @@ a.close.disabled {
   align-items: center;
   justify-content: flex-end;
   padding: 0.75rem;
-  border-top: 1px solid #dee2e6;
 }
 .modal-footer > * {
   margin: 0.25rem;
