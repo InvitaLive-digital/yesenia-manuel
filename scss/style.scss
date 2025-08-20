@@ -789,7 +789,8 @@ body.intro-page {
     color: $secondary;
 }
 
-#event, #section {
+#event,
+#section {
     background-color: $light;
 }
 
@@ -801,42 +802,90 @@ body.intro-page {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'MeowScript'; /* estilo manuscrito */
+    font-family: 'MeowScript';
+    /* estilo manuscrito */
     font-size: 2.5rem;
-    color: $primary; /* tono rosado */
-  }
-  
-  .title-section::before,
-  .title-section::after {
-    content: "";
-    width: 40px;                /* controla el largo de la línea */
-    border-bottom: 1.5px solid $secondary;  /* más grosor y color */
-    margin: 0 10px; 
-  }
+    color: $primary;
+    /* tono rosado */
+}
 
-  .title-galery {
+.title-section::before,
+.title-section::after {
+    content: "";
+    width: 40px;
+    /* controla el largo de la línea */
+    border-bottom: 1.5px solid $secondary;
+    /* más grosor y color */
+    margin: 0 10px;
+}
+
+.title-galery,
+.title-uploadPhoto {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Minion'; /* estilo manuscrito */
+    font-family: 'Minion';
+    /* estilo manuscrito */
     font-size: 1.7rem;
     font-weight: 100;
-    color: $white; /* tono rosado */
-  }
-  .title-galery .cursiva {
+    color: $white;
+    /* tono rosado */
+}
+
+.title-galery .cursiva {
     font-family: 'MeowScript' !important;
-    /* estilo manuscrito */
     font-size: 2.5rem;
     padding-left: 0.5rem;
 }
-  .title-galery::before,
-  .title-galery::after {
-    content: "";
-    width: 40px;                /* controla el largo de la línea */
-    border-bottom: 1.5px solid $white;  /* más grosor y color */
-    margin: 0 10px; 
-  }
 
-  .text-black{
-    color:#000000 
-  }
+.title-uploadPhoto .cursiva {
+    font-family: 'MeowScript' !important;
+    font-size: 2.5rem;
+    padding-left: 0.5rem;
+}
+
+.title-galery::before,
+.title-galery::after {
+    content: "";
+    width: 40px;
+    /* controla el largo de la línea */
+    border-bottom: 1.5px solid $white;
+    /* más grosor y color */
+    margin: 0 10px;
+}
+
+.text-black {
+    color: #000000
+}
+
+.bg-image-overlay {
+    background-image: url('../img/galeria_4.jpeg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    color: white;
+    min-height: 70vh;
+}
+
+.bg-image-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6));
+    z-index: 1;
+}
+
+.bg-image-overlay .container {
+    position: relative;
+    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* Centra verticalmente */
+    min-height: 70vh;
+}
