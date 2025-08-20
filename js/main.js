@@ -318,63 +318,276 @@ document.addEventListener("DOMContentLoaded", function () {
 //   });
 // });
 
-document.addEventListener('DOMContentLoaded', () => {
-  const form = document.getElementById('rsvpForm');
-  if (!form) return;
+// document.addEventListener('DOMContentLoaded', () => {
+//   const form = document.getElementById('rsvpForm');
+//   if (!form) return;
 
-  const statusBox = document.getElementById('rsvpStatus');
-  const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyDrUC6Q7xCGv1jBe9tarqQ9z8FRKjzV_n0Nwri_JSBmytF603DFTcKYPCjQDZLU3nD/exec';
+//   const statusBox = document.getElementById('rsvpStatus');
+//   const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyDrUC6Q7xCGv1jBe9tarqQ9z8FRKjzV_n0Nwri_JSBmytF603DFTcKYPCjQDZLU3nD/exec';
 
-  form.addEventListener('submit', async (e) => {
-    e.preventDefault();
+//   form.addEventListener('submit', async (e) => {
+//     e.preventDefault();
 
-    // Honeypot (anti-bot)
-    if (form.website && form.website.value.trim() !== '') return;
+//     // Honeypot (anti-bot)
+//     if (form.website && form.website.value.trim() !== '') return;
 
-    const nombre = (form.nombre?.value || '').trim();
-    const pases = (form.pases?.value || '').trim();
-    const nota = (form.nota?.value || '').trim();
+//     const nombre = (form.nombre?.value || '').trim();
+//     const pases = (form.pases?.value || '').trim();
+//     const nota = (form.nota?.value || '').trim();
 
-    if (!nombre || !pases) {
-      alert('Por favor completa tu nombre y el número de pase.');
-      return;
-    }
+//     if (!nombre || !pases) {
+//       alert('Por favor completa tu nombre y el número de pase.');
+//       return;
+//     }
 
-    const btn = form.querySelector('button[type="submit"]');
-    if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
-    if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
+//     const btn = form.querySelector('button[type="submit"]');
+//     if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+//     if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
 
-    try {
-      // Enviamos como x-www-form-urlencoded (evita CORS preflight)
-      const body = new URLSearchParams({ nombre, pases, nota });
+//     try {
+//       // Enviamos como x-www-form-urlencoded (evita CORS preflight)
+//       const body = new URLSearchParams({ nombre, pases, nota });
 
-      const res = await fetch(WEB_APP_URL, { method: 'POST', body });
-      const txt = await res.text(); // útil para debug
-      console.log('Respuesta Apps Script:', txt);
+//       const res = await fetch(WEB_APP_URL, { method: 'POST', body });
+//       const txt = await res.text(); // útil para debug
+//       console.log('Respuesta Apps Script:', txt);
 
-      // Intentamos parsear JSON, si no, usamos res.ok
-      let ok = res.ok;
-      try {
-        const json = JSON.parse(txt);
-        ok = !!json.ok;
-      } catch (_) {}
+//       // Intentamos parsear JSON, si no, usamos res.ok
+//       let ok = res.ok;
+//       try {
+//         const json = JSON.parse(txt);
+//         ok = !!json.ok;
+//       } catch (_) {}
 
-      if (ok) {
-        if (statusBox) statusBox.innerHTML =
-          '<span class="text-success">✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los organizadores.</span>';
+//       if (ok) {
+//         if (statusBox) statusBox.innerHTML =
+//           '<span class="text-success">✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los organizadores.</span>';
 
-        // Opcionalmente limpiar el formulario después del éxito
-        // form.reset();
-      } else {
-        if (statusBox) statusBox.innerHTML =
-          '<span class="text-danger">No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
-      }
-    } catch (err) {
-      console.error(err);
-      if (statusBox) statusBox.innerHTML =
-        '<span class="text-danger">Hubo un problema al enviar. Intenta nuevamente.</span>';
-    } finally {
-      if (btn) { btn.disabled = false; btn.textContent = 'Confirmo Asistencia'; }
-    }
-  });
-});
+//         // Opcionalmente limpiar el formulario después del éxito
+//         // form.reset();
+//       } else {
+//         if (statusBox) statusBox.innerHTML =
+//           '<span class="text-danger">No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
+//       }
+//     } catch (err) {
+//       console.error(err);
+//       if (statusBox) statusBox.innerHTML =
+//         '<span class="text-danger">Hubo un problema al enviar. Intenta nuevamente.</span>';
+//     } finally {
+//       if (btn) { btn.disabled = false; btn.textContent = 'Confirmo Asistencia'; }
+//     }
+//   });
+// });
+
+
+  let currentGuestCount = 1;
+        let isAttending = null;
+
+        // ELEMENTOS DEL DOM
+        const attendanceBtns = document.querySelectorAll('.attendance-btn');
+        const guestCounterSection = document.getElementById('guestCounterSection');
+        const guestFieldsContainer = document.getElementById('guestFieldsContainer');
+        const guestCountDisplay = document.getElementById('guestCountDisplay');
+        const increaseBtn = document.getElementById('increaseGuests');
+        const decreaseBtn = document.getElementById('decreaseGuests');
+        const submitBtn = document.getElementById('submitBtn');
+        const messageSection = document.getElementById('messageSection');
+
+        // NUEVA FUNCIONALIDAD: Manejo de botones de asistencia
+        attendanceBtns.forEach(btn => {
+            btn.addEventListener('click', function() {
+                // Remover active de todos
+                attendanceBtns.forEach(b => b.classList.remove('active'));
+                // Agregar active al clickeado
+                this.classList.add('active');
+                
+                // Determinar si asiste
+                isAttending = this.getAttribute('data-attendance') === 'yes';
+                
+                if (isAttending) {
+                    guestCounterSection.style.display = 'block';
+                    generateGuestFields();
+                    submitBtn.textContent = 'CONFIRMAR ASISTENCIA';
+                    messageSection.querySelector('textarea').placeholder = 'Muchas Felicidades, estaré presente!!';
+                } else {
+                    guestCounterSection.style.display = 'none';
+                    generateSingleDeclineField();
+                    submitBtn.textContent = 'ENVIAR FELICITACIONES';
+                    messageSection.querySelector('textarea').placeholder = 'Deja un mensaje de felicitaciones...';
+                }
+            });
+        });
+
+        // NUEVA FUNCIONALIDAD: Botones contador
+        increaseBtn.addEventListener('click', () => {
+            if (currentGuestCount < 10) {
+                currentGuestCount++;
+                updateCounter();
+                generateGuestFields();
+            }
+        });
+
+        decreaseBtn.addEventListener('click', () => {
+            if (currentGuestCount > 1) {
+                currentGuestCount--;
+                updateCounter();
+                generateGuestFields();
+            }
+        });
+
+        // NUEVA FUNCIÓN: Actualizar contador visual
+        function updateCounter() {
+            guestCountDisplay.textContent = currentGuestCount;
+            decreaseBtn.disabled = currentGuestCount <= 1;
+            increaseBtn.disabled = currentGuestCount >= 10;
+        }
+
+        // NUEVA FUNCIÓN: Generar campos dinámicos para invitados
+        function generateGuestFields() {
+            let html = '';
+            
+            for (let i = 0; i < currentGuestCount; i++) {
+                const isMain = i === 0;
+                const title = isMain ? 'Tus datos' : `Acompañante ${i}`;
+                
+                html += `
+                    <div class="guest-field-group">
+                        <h6><i class="fas fa-user me-2"></i>${title}</h6>
+                        <div class="form-row">
+                            <div class="form-group col-sm-6">
+                                <input name="nombre_${i}" required type="text"
+                                    class="form-control border-2 py-4 px-3" 
+                                    placeholder="${isMain ? 'Tu nombre completo' : 'Nombre completo'}">
+                            </div>
+                            <div class="form-group col-sm-6">
+                                <input name="email_${i}" ${isMain ? 'required' : ''} type="email"
+                                    class="form-control border-2 py-4 px-3"
+                                    placeholder="${isMain ? 'Tu correo electrónico' : 'Correo (opcional)'}">
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            
+            guestFieldsContainer.innerHTML = html;
+        }
+
+        // NUEVA FUNCIÓN: Campo único para quien no asiste
+        function generateSingleDeclineField() {
+            guestFieldsContainer.innerHTML = `
+                <div class="guest-field-group">
+                    <h6><i class="fas fa-user me-2"></i>Tus datos</h6>
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <input name="nombre" required type="text"
+                                class="form-control border-2 py-4 px-3" 
+                                placeholder="Tu nombre completo">
+                        </div>
+                        <div class="form-group col-sm-6">
+                            <input name="email" required type="email"
+                                class="form-control border-2 py-4 px-3"
+                                placeholder="Tu correo electrónico">
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        // MODIFICACIÓN MÍNIMA: Tu JavaScript existente con pequeños ajustes
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('rsvpForm');
+            if (!form) return;
+
+            const statusBox = document.getElementById('rsvpStatus');
+            const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbyDrUC6Q7xCGv1jBe9tarqQ9z8FRKjzV_n0Nwri_JSBmytF603DFTcKYPCjQDZLU3nD/exec';
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Honeypot (anti-bot) - mantener igual
+                if (form.website && form.website.value.trim() !== '') return;
+
+                // NUEVA VALIDACIÓN: Verificar que haya seleccionado asistencia
+                if (isAttending === null) {
+                    alert('Por favor indica si podrás asistir o no.');
+                    return;
+                }
+
+                // NUEVA LÓGICA: Recopilar datos según el tipo de respuesta
+                let formData = {};
+                
+                if (isAttending) {
+                    // Si asiste: recopilar datos de todos los invitados
+                    formData.asistencia = 'Si';
+                    formData.cantidad_invitados = currentGuestCount;
+                    
+                    let nombres = [];
+                    let emails = [];
+                    
+                    for (let i = 0; i < currentGuestCount; i++) {
+                        const nombreField = form.querySelector(`input[name="nombre_${i}"]`);
+                        const emailField = form.querySelector(`input[name="email_${i}"]`);
+                        
+                        if (nombreField && nombreField.value.trim()) {
+                            nombres.push(nombreField.value.trim());
+                        }
+                        if (emailField && emailField.value.trim()) {
+                            emails.push(emailField.value.trim());
+                        }
+                    }
+                    
+                    formData.nombres = nombres.join(', ');
+                    formData.emails = emails.join(', ');
+                } else {
+                    // Si no asiste: datos simples
+                    formData.asistencia = 'No';
+                    formData.cantidad_invitados = 0;
+                    formData.nombres = (form.nombre?.value || '').trim();
+                    formData.emails = (form.email?.value || '').trim();
+                }
+
+                // Nota (común para ambos casos)
+                formData.nota = (form.nota?.value || '').trim();
+
+                // Validar campos requeridos
+                if (!formData.nombres) {
+                    alert('Por favor completa tu nombre.');
+                    return;
+                }
+
+                const btn = form.querySelector('button[type="submit"]');
+                if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
+                if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
+
+                try {
+                    // MANTENER: Tu lógica de envío existente
+                    const body = new URLSearchParams(formData);
+                    const res = await fetch(WEB_APP_URL, { method: 'POST', body });
+                    const txt = await res.text();
+                    console.log('Respuesta Apps Script:', txt);
+
+                    let ok = res.ok;
+                    try {
+                        const json = JSON.parse(txt);
+                        ok = !!json.ok;
+                    } catch (_) {}
+
+                    if (ok) {
+                        if (statusBox) statusBox.innerHTML =
+                            '<span class="text-success">✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los organizadores.</span>';
+                    } else {
+                        if (statusBox) statusBox.innerHTML =
+                            '<span class="text-danger">No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
+                    }
+                } catch (err) {
+                    console.error(err);
+                    if (statusBox) statusBox.innerHTML =
+                        '<span class="text-danger">Hubo un problema al enviar. Intenta nuevamente.</span>';
+                } finally {
+                    if (btn) { btn.disabled = false; btn.textContent = isAttending ? 'CONFIRMAR ASISTENCIA' : 'ENVIAR FELICITACIONES'; }
+                }
+            });
+
+            // Inicializar contador
+            updateCounter();
+        });

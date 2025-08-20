@@ -159,7 +159,7 @@
                         <p class="mb-0 text-black">A las 2:00 P.M.</p>
                         <br>
                         <a href="https://maps.app.goo.gl/CgYDCeJYnoikrvdE7" target="_blank"
-                            class="btn btn-secondary font-weight-bold py-3 px-5">¿CÓMO LLEGAR?</a>
+                            class="btn btn-secondary font-weight-bold  px-5">¿CÓMO LLEGAR?</a>
 
                     </div>
                 </div>
@@ -175,7 +175,7 @@
                         <p class="mb-0 text-black">A las 5:00 P.M.</p>
                         <br>
                         <a href="https://maps.app.goo.gl/CgYDCeJYnoikrvdE7" target="_blank"
-                            class="btn btn-secondary font-weight-bold py-3 px-5">¿CÓMO LLEGAR?</a>
+                            class="btn btn-secondary font-weight-bold px-5">¿CÓMO LLEGAR?</a>
 
                     </div>
                 </div>
@@ -272,7 +272,7 @@
                             aquí tienes nuestros lista.</p>
                         <br>
                         <a href="https://maps.app.goo.gl/CgYDCeJYnoikrvdE7" target="_blank"
-                            class="btn btn-secondary font-weight-bold py-3 px-5">LISTA DE REGALOS</a>
+                            class="btn btn-secondary font-weight-bold px-5">LISTA DE REGALOS</a>
                     </div>
                     <br>
                 </div>
@@ -333,7 +333,7 @@
                 </div>
             </div>
         </div>
-        <div class="row justify-content-center animate-on-scroll">
+        <!-- <div class="row justify-content-center animate-on-scroll">
             <div class="col-lg-8">
                 <div class="text-center">
                     <form id="rsvpForm">
@@ -365,8 +365,63 @@
                     </form>
                 </div>
             </div>
+        </div> -->
+    <div class="row justify-content-center animate-on-scroll">
+            <div class="col-lg-8">
+                <div class="text-center">
+                    <form id="rsvpForm">
+                        
+                        <!-- NUEVO: Selector de asistencia -->
+                        <div class="attendance-selector">
+                            <h6 class="text-light mb-3">¿Podrás acompañarnos?</h6>
+                            <button type="button" class="btn attendance-btn" data-attendance="yes">
+                                <i class="fas fa-heart me-1"></i> ¡Sí, estaré ahí!
+                            </button>
+                            <button type="button" class="btn attendance-btn" data-attendance="no">
+                                <i class="fas fa-heart-broken me-1"></i> No podré asistir
+                            </button>
+                        </div>
+
+                        <!-- NUEVO: Contador de invitados (solo aparece si dice que sí) -->
+                        <div id="guestCounterSection" class="guest-counter-section" style="display: none;">
+                            <h6 class="text-light mb-3">¿Cuántas personas asistirán?</h6>
+                            <div class="d-flex justify-content-center align-items-center">
+                                <button type="button" class="btn counter-btn" id="decreaseGuests">
+                                    <i class="fas fa-minus"></i>
+                                </button>
+                                <span class="guest-count-display" id="guestCountDisplay">1</span>
+                                <button type="button" class="btn counter-btn" id="increaseGuests">
+                                    <i class="fas fa-plus"></i>
+                                </button>
+                            </div>
+                            <small class="text-light d-block mt-2">Incluye tu nombre y el de tus acompañantes</small>
+                        </div>
+
+                        <!-- MODIFICADO: Contenedor dinámico para campos de invitados -->
+                        <div id="guestFieldsContainer">
+                            <!-- Los campos se generan aquí dinámicamente -->
+                        </div>
+
+                        <!-- Campo de mensaje (aparece siempre) -->
+                        <div class="form-group" id="messageSection">
+                            <textarea name="nota" class="form-control border-2 py-2 px-3" rows="5"
+                                placeholder="Muchas Felicidades, estaré presente!!"></textarea>
+                        </div>
+
+                        <!-- Campo anti-spam (mantener igual) -->
+                        <input type="text" name="website" tabindex="-1" autocomplete="off"
+                            style="position:absolute;left:-9999px;opacity:0;">
+
+                        <div>
+                            <button class="btn btn-light font-weight-bold px-5" type="submit" id="submitBtn">
+                                CONFIRMAR ASISTENCIA
+                            </button>
+                        </div>
+                        <div id="rsvpStatus" class="mt-3 small"></div>
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
     </div>
     <!-- RSVP End -->
 
