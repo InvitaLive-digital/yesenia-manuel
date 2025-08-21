@@ -87,9 +87,11 @@
 
 
 // ✅ BOTÓN DE MÚSICA (solo si existe)
+// ✅ BOTÓN DE MÚSICA (solo si existe)
 document.addEventListener("DOMContentLoaded", function () {
     const audio = document.getElementById('bg-music');
     const musicBtn = document.getElementById('music-btn');
+    const musicMessage = document.querySelector('.text-note');
     let isPlaying = false;
 
     if (musicBtn && audio) {
@@ -102,6 +104,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 musicBtn.classList.add('active');
             }
             isPlaying = !isPlaying;
+            if (musicMessage) musicMessage.style.display = isPlaying ? 'block' : 'none'; // ← INVERTIDO
         });
 
         window.addEventListener('click', () => {
@@ -109,12 +112,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 audio.play().then(() => {
                     isPlaying = true;
                     musicBtn.classList.add('active');
+                    if (musicMessage) musicMessage.style.display = 'block'; // ← CAMBIADO
                 }).catch(() => { });
             }
         }, { once: true });
     }
 });
-
 
 // ✅ CUENTA REGRESIVA (si hay contenedor)
 (function countdownInit() {

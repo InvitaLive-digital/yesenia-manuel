@@ -9956,4 +9956,8 @@ body.intro-page {
   border-radius: 10px;
 }
 
+.icon-iniciales {
+  filter: brightness(0) invert(1);
+}
+
 /*# sourceMappingURL=style.css.map */
