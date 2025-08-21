@@ -647,12 +647,12 @@ body.intro-page {
 
 .nombre-invitado {
     position: absolute;
-    bottom: 145px;
+    bottom: 100px;
     /* ajusta verticalmente */
     left: 55%;
     transform: translateX(-50%);
     padding: 10px 25px;
-    font-size: 1.2rem;
+    font-size: 1.4rem!important;
     font-weight: bold;
     color: #333;
     z-index: 2;
@@ -664,7 +664,7 @@ body.intro-page {
 @media (max-width: 750px) {
     .nombre-invitado {
         position: absolute;
-        bottom: 115px;
+        bottom: 94px;
         /* ajusta verticalmente */
         left: 50%;
     }
@@ -754,6 +754,7 @@ body.intro-page {
         font-weight: 100;
         color: $primary;
         font-size: 2rem; // rojo/rosado de tu paleta
+        padding-right: 8px;
     }
 
     &:hover {
