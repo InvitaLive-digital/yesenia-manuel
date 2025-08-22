@@ -9559,7 +9559,7 @@ body.intro-page {
   margin: 0;
   padding: 0;
   font-family: "Montserrat", sans-serif;
-  background: url("../img/iniciales.png") no-repeat top center, #b86461;
+  background: url("../img/iniciales_boda.png") no-repeat top center, #b86461;
   background-size: 80%;
   min-height: 100vh;
   display: flex;
@@ -9650,7 +9650,7 @@ body.intro-page {
 
 .nombre-invitado {
   position: absolute;
-  bottom: 100px;
+  bottom: 102px;
   /* ajusta verticalmente */
   left: 55%;
   transform: translateX(-50%);
@@ -9666,7 +9666,7 @@ body.intro-page {
 @media (max-width: 750px) {
   .nombre-invitado {
     position: absolute;
-    bottom: 94px;
+    bottom: 96px;
     /* ajusta verticalmente */
     left: 50%;
   }

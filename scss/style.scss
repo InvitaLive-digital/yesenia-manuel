@@ -546,7 +546,7 @@ body.intro-page {
     padding: 0;
     font-family: $font-family-sans-serif;
     background:
-        url('../img/iniciales.png') no-repeat top center, // tu imagen
+        url('../img/iniciales_boda.png') no-repeat top center, // tu imagen
         $primary;
     background-size: 80%;
     min-height: 100vh;
@@ -647,7 +647,7 @@ body.intro-page {
 
 .nombre-invitado {
     position: absolute;
-    bottom: 100px;
+    bottom: 102px;
     /* ajusta verticalmente */
     left: 55%;
     transform: translateX(-50%);
@@ -664,7 +664,7 @@ body.intro-page {
 @media (max-width: 750px) {
     .nombre-invitado {
         position: absolute;
-        bottom: 94px;
+        bottom: 96px;
         /* ajusta verticalmente */
         left: 50%;
     }
