@@ -121,7 +121,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // ✅ CUENTA REGRESIVA (si hay contenedor)
 (function countdownInit() {
-    const targetDate = new Date("2025-10-25T09:45:00").getTime();
+    const targetDate = new Date("2025-10-25T14:00:00").getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
