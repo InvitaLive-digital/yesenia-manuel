@@ -179,13 +179,20 @@ document.addEventListener("DOMContentLoaded", function () {
     const lista = params.get("list");
     const contenedor = document.getElementById("nombre-invitado");
     const seccionLista = document.getElementById("seccion-lista");
+    const linkInicio = document.getElementById("link-inicio");
+
     if (nombre && contenedor) {
         contenedor.textContent = `${decodeURIComponent(nombre)}`;
     }
     if (lista === "1" && seccionLista) {
-        seccionLista.style.display = "block";  
+        seccionLista.style.display = "block";
+    }
+        // Mantener parámetros en el link hacia inicio.html
+    if (linkInicio) {
+        linkInicio.href = `inicio.html?${params.toString()}`;
     }
 });
+
 
 document.addEventListener("DOMContentLoaded", function () {
     const envelope = document.querySelector("a.envelope-btn"); // El botón que lleva a inicio.html

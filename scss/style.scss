@@ -35,6 +35,14 @@ $border-width: 1px;
     font-style: normal;
 }
 
+body {
+    max-width: 1500px;
+    margin: 0 auto;
+    justify-content: center;
+    /* Centrar horizontal */
+    align-items: center;
+}
+
 /********** Template CSS ************/
 .font-secondary {
     font-family: 'MeowScript';
@@ -420,6 +428,7 @@ $border-width: 1px;
     z-index: 9999;
     border: none;
     outline: none;
+
     img {
         width: 28px;
         transition: filter 0.3s;
@@ -448,7 +457,8 @@ $border-width: 1px;
     position: absolute;
     bottom: 0px !important;
     z-index: 10;
-
+    margin: 0 auto;
+    max-width: 1500px;
     #countdown {
         background: $primary !important;
         padding: 0.75rem 1rem;
@@ -652,7 +662,7 @@ body.intro-page {
     left: 55%;
     transform: translateX(-50%);
     padding: 10px 25px;
-    font-size: 1.4rem!important;
+    font-size: 1.4rem !important;
     font-weight: bold;
     color: #333;
     z-index: 2;
@@ -968,6 +978,6 @@ body.intro-page {
     border-radius: 10px;
 }
 
-.icon-iniciales{
-     filter: brightness(0) invert(1);
+.icon-iniciales {
+    filter: brightness(0) invert(1);
 }
