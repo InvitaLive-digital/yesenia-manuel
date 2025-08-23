@@ -175,11 +175,15 @@ document.addEventListener("DOMContentLoaded", function () {
 // ✅ MOSTRAR NOMBRE DESDE URL (solo si hay el contenedor)
 document.addEventListener("DOMContentLoaded", function () {
     const params = new URLSearchParams(window.location.search);
-    const nombre = params.get("nombre");
+    const nombre = params.get("name");
+    const lista = params.get("list");
     const contenedor = document.getElementById("nombre-invitado");
-
+    const seccionLista = document.getElementById("seccion-lista");
     if (nombre && contenedor) {
         contenedor.textContent = `${decodeURIComponent(nombre)}`;
+    }
+    if (lista === "1" && seccionLista) {
+        seccionLista.style.display = "block";  
     }
 });
 
