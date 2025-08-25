@@ -9107,14 +9107,6 @@ a.text-transparent:hover, a.text-transparent:focus {
   font-weight: normal;
   font-style: normal;
 }
-body {
-  max-width: 1500px;
-  margin: 0 auto;
-  justify-content: center;
-  /* Centrar horizontal */
-  align-items: center;
-}
-
 /********** Template CSS ************/
 .font-secondary {
   font-family: "MeowScript";
@@ -9454,7 +9446,6 @@ body {
   z-index: 9999;
   border: none;
   outline: none;
-  max-width: 1500px;
 }
 .music-button img {
   width: 28px;
@@ -9479,7 +9470,6 @@ body {
   bottom: 0px !important;
   z-index: 10;
   margin: 0 auto;
-  max-width: 1500px;
 }
 #countdown-section #countdown {
   background: #b86461 !important;

@@ -35,13 +35,7 @@ $border-width: 1px;
     font-style: normal;
 }
 
-body {
-    max-width: 1500px;
-    margin: 0 auto;
-    justify-content: center;
-    /* Centrar horizontal */
-    align-items: center;
-}
+
 
 /********** Template CSS ************/
 .font-secondary {
@@ -458,7 +452,6 @@ body {
     bottom: 0px !important;
     z-index: 10;
     margin: 0 auto;
-    max-width: 1500px;
     #countdown {
         background: $primary !important;
         padding: 0.75rem 1rem;
