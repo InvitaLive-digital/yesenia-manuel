@@ -422,7 +422,7 @@ attendanceBtns.forEach(btn => {
             guestCounterSection.style.display = 'block';
             generateGuestFields();
             submitBtn.textContent = 'CONFIRMAR ASISTENCIA';
-            messageSection.querySelector('textarea').placeholder = 'Muchas Felicidades, estaré presente!!';
+            messageSection.querySelector('textarea').placeholder = 'Deja un mensaje de felicitaciones, por ejemplo: Muchas Felicidades, estaré presente!!';
         } else {
             guestCounterSection.style.display = 'none';
             generateSingleDeclineField();

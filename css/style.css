@@ -9651,9 +9651,9 @@ body.intro-page {
 
 .nombre-invitado {
   position: absolute;
-  bottom: 102px;
+  bottom: 135px;
   /* ajusta verticalmente */
-  left: 55%;
+  left: 50%;
   transform: translateX(-50%);
   padding: 10px 25px;
   font-size: 1.4rem !important;
@@ -9664,12 +9664,32 @@ body.intro-page {
   font-family: "Great Vibes", cursive;
 }
 
+.para-label {
+  position: absolute;
+  bottom: 160px;
+  left: 20%;
+  transform: translateX(-50%);
+  padding: 10px 25px;
+  font-size: 1.4rem !important;
+  font-weight: bold;
+  color: #4B5C49;
+  z-index: 2;
+  white-space: nowrap;
+  font-family: "Great Vibes", cursive;
+}
+
 @media (max-width: 750px) {
   .nombre-invitado {
     position: absolute;
-    bottom: 96px;
+    bottom: 125px;
     /* ajusta verticalmente */
     left: 50%;
+  }
+  .para-label {
+    position: absolute;
+    bottom: 150px;
+    /* ajusta verticalmente */
+    left: 20%;
   }
 }
 .text-note {
@@ -9960,6 +9980,11 @@ body.intro-page {
 
 .icon-iniciales {
   filter: brightness(0) invert(1);
+}
+
+.para-container {
+  text-align: center;
+  margin-top: 15px;
 }
 
 /*# sourceMappingURL=style.css.map */
