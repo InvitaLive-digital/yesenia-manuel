@@ -187,7 +187,7 @@ document.addEventListener("DOMContentLoaded", function () {
     if (lista === "1" && seccionLista) {
         seccionLista.style.display = "block";
     }
-        // Mantener parámetros en el link hacia inicio.html
+    // Mantener parámetros en el link hacia inicio.html
     if (linkInicio) {
         linkInicio.href = `inicio.html?${params.toString()}`;
     }
@@ -572,7 +572,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const btn = form.querySelector('button[type="submit"]');
         if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
-        if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
+        // if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
 
         try {
             // MANTENER: Tu lógica de envío existente
@@ -587,19 +587,38 @@ document.addEventListener('DOMContentLoaded', () => {
                 ok = !!json.ok;
             } catch (_) { }
 
+            // Abrir modal con el resultado
+            const modalBody = document.getElementById("statusModalBody");
+
             if (ok) {
-                if (statusBox) statusBox.innerHTML =
-                    '<span class="text-success">✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los organizadores.</span>';
+                modalBody.innerHTML =
+                    '<span>✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los novios.</span>';
             } else {
-                if (statusBox) statusBox.innerHTML =
-                    '<span class="text-danger">No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
+                modalBody.innerHTML =
+                    '<span>⚠️ No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
             }
+
+            // Mostrar el modal
+            const modal = new bootstrap.Modal(document.getElementById('statusModal'));
+            modal.show();
+
         } catch (err) {
             console.error(err);
-            if (statusBox) statusBox.innerHTML =
-                '<span class="text-danger">Hubo un problema al enviar. Intenta nuevamente.</span>';
+
+            const modalBody = document.getElementById("statusModalBody");
+            modalBody.innerHTML =
+                '<span>❌ Hubo un problema al enviar. Intenta nuevamente.</span>';
+
+            const modal = new bootstrap.Modal(document.getElementById('statusModal'));
+            modal.show();
+
         } finally {
-            if (btn) { btn.disabled = false; btn.textContent = isAttending ? 'CONFIRMAR ASISTENCIA' : 'ENVIAR FELICITACIONES'; }
+            if (btn) {
+                btn.disabled = false;
+                btn.textContent = isAttending
+                    ? 'CONFIRMAR ASISTENCIA'
+                    : 'ENVIAR FELICITACIONES';
+            }
         }
     });
 

@@ -9498,7 +9498,7 @@ a.text-transparent:hover, a.text-transparent:focus {
 .calendar-header {
   font-size: 2.5rem;
   color: #b86461;
-  font-family: "Great Vibes", cursive;
+  font-family: "MeowScript";
   font-weight: 600;
 }
 
@@ -9656,12 +9656,12 @@ body.intro-page {
   left: 50%;
   transform: translateX(-50%);
   padding: 10px 25px;
-  font-size: 1.4rem !important;
+  font-size: 1.2rem !important;
   font-weight: bold;
   color: #333;
   z-index: 2;
   white-space: nowrap;
-  font-family: "Great Vibes", cursive;
+  font-family: "Minion";
 }
 
 .para-label {
@@ -9675,7 +9675,7 @@ body.intro-page {
   color: #4B5C49;
   z-index: 2;
   white-space: nowrap;
-  font-family: "Great Vibes", cursive;
+  font-family: "MeowScript";
 }
 
 @media (max-width: 750px) {
