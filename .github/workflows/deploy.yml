@@ -1,0 +1,21 @@
+name: Deploy to invitalive.com/yesenia-manuel
+on:
+  push:
+    branches: [ main ]
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Create .nojekyll
+        run: touch .nojekyll
+
+      - name: Publish into org root repo subfolder
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PUBLISH_TOKEN }}
+          external_repository: InvitaLive-digital/web-oficial   # 👈 repo con el dominio
+          publish_branch: main
+          publish_dir: .                                        # o 'dist'/'build'
+          destination_dir: yesenia-manuel                     # 👈 subcarpeta/URL
