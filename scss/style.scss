@@ -177,20 +177,6 @@ $border-width: 1px;
     background: $light;
 }
 
-// .btn-play:before {
-//     content: "";
-//     position: absolute;
-//     z-index: 0;
-//     left: 50%;
-//     top: 50%;
-//     transform: translateX(-50%) translateY(-50%);
-//     display: block;
-//     width: 60px;
-//     height: 60px;
-//     background: $light;
-//     border-radius: 100%;
-//     animation: pulse-border 1500ms ease-out infinite;
-// }
 
 .btn-play:after {
     content: "";
@@ -1002,29 +988,6 @@ body.intro-page {
     text-align: center;
     margin-top: 15px;
 }
-
-// .para-label,
-// .nombre-invitado {
-//   display: inline-block;
-//   position: relative;
-//   font-family: 'Montserrat', sans-serif;
-//   font-weight: 500;
-//   color: #394937;
-//   font-size: 1rem;
-//   padding: 0 12px;
-// }
-
-// .para-label::before,
-// .para-label::after,
-// .nombre-invitado::before,
-// .nombre-invitado::after {
-//   content: "";
-//   position: absolute;
-//   top: 50%;
-//   width: 40px;   /* largo de la línea */
-//   height: 1.5px; /* grosor */
-//   background: #394937;
-// }
 
 /* ✅ OVERLAY BASE TEMÁTICO DE BODA */
 #loadingOverlay {
