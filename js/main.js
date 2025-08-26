@@ -512,27 +512,311 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('rsvpForm');
     if (!form) return;
 
-    const statusBox = document.getElementById('rsvpStatus');
     const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbwgkOtKu1dWxLpCbtF7Sh7VoZWv6nchfc9goL8BKtS1mOetcso0Xyv5t2TKiA4x6Vm1tA/exec';
+
+    // ✅ FUNCIÓN PARA ACTUALIZAR LA INTERFAZ VISUAL DE ASISTENCIA
+    function updateAttendanceVisual() {
+        // Para botones personalizados de asistencia
+        const attendanceButtons = document.querySelectorAll('.attendance-btn');
+        const guestSection = document.getElementById('guestSection') || document.querySelector('.guest-section');
+        const submitBtn = form.querySelector('button[type="submit"]');
+        
+        // Actualizar estilos de los botones de asistencia
+        attendanceButtons.forEach(button => {
+            const attendanceValue = button.getAttribute('data-attendance');
+            
+            // Remover todas las clases de estado
+            button.classList.remove('active', 'selected');
+            
+            // Aplicar clase según el estado actual
+            if (typeof isAttending !== 'undefined') {
+                if (isAttending === true && attendanceValue === 'yes') {
+                    button.classList.add('active');
+                } else if (isAttending === false && attendanceValue === 'no') {
+                    button.classList.add('active');
+                }
+            }
+        });
+        
+        // También manejar radio buttons tradicionales si existen
+        const attendanceRadios = document.querySelectorAll('input[name="asistencia"]');
+        attendanceRadios.forEach(radio => {
+            const container = radio.closest('.form-check') || radio.closest('.radio-container') || radio.parentElement;
+            
+            if (radio.checked) {
+                if (container) {
+                    container.classList.add('selected', 'active');
+                    if (radio.value === 'si' || radio.value === 'true') {
+                        container.classList.add('attending-yes');
+                    } else {
+                        container.classList.add('attending-no');
+                    }
+                }
+            } else {
+                if (container) {
+                    container.classList.remove('selected', 'active', 'attending-yes', 'attending-no');
+                }
+            }
+        });
+        
+        // Mostrar/ocultar sección de invitados
+        if (guestSection) {
+            if (typeof isAttending !== 'undefined' && isAttending === true) {
+                guestSection.style.display = 'block';
+                guestSection.classList.add('show');
+            } else {
+                guestSection.style.display = 'none';
+                guestSection.classList.remove('show');
+            }
+        }
+        
+        // Actualizar texto del botón
+        if (submitBtn) {
+            if (typeof isAttending !== 'undefined') {
+                if (isAttending === true) {
+                    submitBtn.textContent = 'CONFIRMAR ASISTENCIA';
+                    submitBtn.className = 'btn btn-light font-weight-bold';
+                    submitBtn.disabled = false;
+                } else {
+                    submitBtn.textContent = 'ENVIAR FELICITACIONES';
+                    submitBtn.className = 'btn btn-primary font-weight-bold';
+                    submitBtn.disabled = false;
+                } 
+            }
+        }
+    }
+
+    // ✅ MEJORADO: Función para mostrar/ocultar overlay centrado mejor
+    function toggleFormBlocking(isBlocked) {
+        const overlay = document.getElementById('loadingOverlay');
+        const allInputs = form.querySelectorAll('input, textarea, button, select');
+        
+        if (isBlocked) {
+            // Mostrar overlay centrado al área principal del formulario
+            if (overlay) {
+                overlay.style.display = 'flex';
+                // Opcional: centrar respecto al formulario en lugar de toda la pantalla
+                // overlay.style.top = form.offsetTop + 'px';
+            }
+            
+            // Deshabilitar todos los campos
+            allInputs.forEach(input => {
+                input.disabled = true;
+                input.style.pointerEvents = 'none';
+            });
+            
+            // Bloquear interacción
+            document.body.style.pointerEvents = 'none';
+            
+        } else {
+            // Ocultar overlay
+            if (overlay) overlay.style.display = 'none';
+            
+            // Rehabilitar campos
+            allInputs.forEach(input => {
+                input.disabled = false;
+                input.style.pointerEvents = 'auto';
+            });
+            
+            // Restaurar interacción
+            document.body.style.pointerEvents = 'auto';
+        }
+    }
+
+    // ✅ FUNCIÓN PARA RESETEAR COMPLETAMENTE EL FORMULARIO Y ESTADO
+    function resetFormAndState() {
+        // 1. Reset del formulario HTML
+        form.reset();
+        
+        // 2. Reset de variables JavaScript
+        if (typeof currentGuestCount !== 'undefined') currentGuestCount = 1;
+        if (typeof isAttending !== 'undefined') isAttending = null;
+        
+        // 3. Limpiar visual de radio buttons de asistencia
+        const attendanceRadios = form.querySelectorAll('input[name="asistencia"]');
+        attendanceRadios.forEach(radio => {
+            radio.checked = false;
+            // Remover clases visuales si las tienes
+            radio.parentElement?.classList.remove('selected', 'active');
+        });
+        
+        // 4. Ocultar sección de invitados si estaba visible
+        const guestSection = document.getElementById('guestSection') || document.querySelector('.guest-section');
+        if (guestSection) {
+            guestSection.style.display = 'none';
+        }
+        
+        // 5. Resetear contador visual
+        if (typeof updateCounter === 'function') updateCounter();
+        
+        // 6. Resetear botón a estado inicial
+        const submitBtn = form.querySelector('button[type="submit"]');
+        if (submitBtn) {
+            submitBtn.textContent = 'ENVIAR RESPUESTA';
+            submitBtn.disabled = false;
+        }
+        
+        // 7. Limpiar campos dinámicos de invitados
+        const guestInputsContainer = document.getElementById('guestInputs') || document.querySelector('.guest-inputs');
+        if (guestInputsContainer) {
+            guestInputsContainer.innerHTML = '';
+        }
+    }
+    function showResultMessage(type, message) {
+        const resultContainer = document.getElementById('resultMessage');
+        
+        if (!resultContainer) {
+            console.warn('No se encontró el contenedor #resultMessage');
+            return;
+        }
+
+        // Limpiar contenido anterior
+        resultContainer.innerHTML = '';
+        
+        let icon = '';
+        let className = '';
+        
+        switch(type) {
+            case 'success':
+                icon = '✅';
+                className = 'alert-success';
+                break;
+            case 'error':
+                icon = '❌';
+                className = 'alert-danger';
+                break;
+            case 'warning':
+                icon = '⚠️';
+                className = 'alert-warning';
+                break;
+        }
+
+        resultContainer.innerHTML = `
+            <div class="alert ${className} result-message" role="alert">
+                <div class="result-icon">${icon}</div>
+                <div class="result-text">${message}</div>
+            </div>
+        `;
+
+        // Scroll suave hacia el mensaje
+        resultContainer.scrollIntoView({ 
+            behavior: 'smooth', 
+            block: 'center' 
+        });
+
+        // Auto-ocultar después de 8 segundos (solo para éxito)
+        if (type === 'success') {
+            setTimeout(() => {
+                const alertElement = resultContainer.querySelector('.alert');
+                if (alertElement) {
+                    alertElement.style.opacity = '0';
+                    alertElement.style.transform = 'translateY(-20px)';
+                    setTimeout(() => {
+                        resultContainer.innerHTML = '';
+                    }, 500);
+                }
+            }, 8000);
+        }
+    }
+
+    // ✅ FUNCIÓN PARA RESETEAR COMPLETAMENTE EL FORMULARIO Y ESTADO
+    function resetFormAndState() {
+        // 1. Reset del formulario HTML
+        form.reset();
+        
+        // 2. Reset de variables JavaScript
+        if (typeof currentGuestCount !== 'undefined') currentGuestCount = 1;
+        if (typeof isAttending !== 'undefined') isAttending = null;
+        
+        // 3. ✅ QUITAR ACTIVE ESPECÍFICAMENTE DE LOS BOTONES DE ASISTENCIA
+        const attendanceButtons = document.querySelectorAll('.attendance-btn[data-attendance]');
+        attendanceButtons.forEach(btn => {
+            btn.classList.remove('active');
+        });
+        
+        // 4. Limpiar campos dinámicos de invitados
+        const guestInputsContainer = document.getElementById('guestInputs') || document.querySelector('.guest-inputs');
+        if (guestInputsContainer) {
+            guestInputsContainer.innerHTML = '';
+        }
+        
+        // 5. ✅ ACTUALIZAR INTERFAZ VISUAL DESPUÉS DEL RESET
+        setTimeout(() => {
+            updateAttendanceVisual();
+            if (typeof updateCounter === 'function') updateCounter();
+        }, 50); // Pequeño delay para que el reset se complete
+    }
+
+    // ✅ EVENTOS PARA LOS BOTONES DE ASISTENCIA PERSONALIZADOS
+    const attendanceButtons = document.querySelectorAll('.attendance-btn');
+    attendanceButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const attendanceValue = this.getAttribute('data-attendance');
+            
+            // Remover active de todos los botones de asistencia primero
+            attendanceButtons.forEach(btn => {
+                btn.classList.remove('active');
+            });
+            
+            // Actualizar variable global
+            if (typeof isAttending !== 'undefined') {
+                isAttending = attendanceValue === 'yes';
+            }
+            
+            // Agregar clase active al botón clickeado
+            this.classList.add('active');
+       
+            // ✅ ACTUALIZAR LA INTERFAZ VISUAL
+            updateAttendanceVisual();
+            
+            // Si selecciona "Sí", asegurar que el contador esté en 1
+            if (typeof currentGuestCount !== 'undefined' && isAttending) {
+                if (currentGuestCount < 1) currentGuestCount = 1;
+            }
+        });
+    });
+
+    // ✅ EVENTOS PARA LOS RADIO BUTTONS DE ASISTENCIA (por si también los tienes)
+    const attendanceRadios = document.querySelectorAll('input[name="asistencia"]');
+    attendanceRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                // Actualizar variable global
+                if (typeof isAttending !== 'undefined') {
+                    isAttending = this.value === 'si' || this.value === 'true' || this.value === true;
+                }
+                
+                // ✅ ACTUALIZAR LA INTERFAZ VISUAL
+                updateAttendanceVisual();
+                
+                // Si selecciona "Sí", asegurar que el contador esté en 1
+                if (typeof currentGuestCount !== 'undefined' && isAttending) {
+                    if (currentGuestCount < 1) currentGuestCount = 1;
+                }
+            }
+        });
+    });
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        // Honeypot (anti-bot) - mantener igual
+        // Limpiar mensajes anteriores
+        const resultContainer = document.getElementById('resultMessage');
+        if (resultContainer) resultContainer.innerHTML = '';
+
+        // Honeypot (anti-bot)
         if (form.website && form.website.value.trim() !== '') return;
 
-        // NUEVA VALIDACIÓN: Verificar que haya seleccionado asistencia
+        // Validación de asistencia
         if (isAttending === null) {
-            // alert('Por favor indica si podrás asistir o no.');
-            $('#validationModal').modal('show'); // ✅ Modal en lugar de alert
+            showResultMessage('warning', 'Por favor indica si podrás asistir o no.');
             return;
         }
 
-        // NUEVA LÓGICA: Recopilar datos según el tipo de respuesta
+        // Recopilar datos
         let formData = {};
 
         if (isAttending) {
-            // Si asiste: recopilar datos de todos los invitados
             formData.asistencia = 'Si';
             formData.cantidad_invitados = currentGuestCount;
 
@@ -554,28 +838,30 @@ document.addEventListener('DOMContentLoaded', () => {
             formData.nombres = nombres.join(', ');
             formData.emails = emails.join(', ');
         } else {
-            // Si no asiste: datos simples
             formData.asistencia = 'No';
             formData.cantidad_invitados = 0;
             formData.nombres = (form.nombre?.value || '').trim();
             formData.emails = (form.email?.value || '').trim();
         }
 
-        // Nota (común para ambos casos)
         formData.nota = (form.nota?.value || '').trim();
 
         // Validar campos requeridos
         if (!formData.nombres) {
-            alert('Por favor completa tu nombre.');
+            showResultMessage('warning', 'Por favor completa tu nombre.');
             return;
         }
 
         const btn = form.querySelector('button[type="submit"]');
-        if (btn) { btn.disabled = true; btn.textContent = 'Enviando...'; }
-        // if (statusBox) statusBox.textContent = 'Guardando tu confirmación...';
+        
+        // ✅ BLOQUEAR CON OVERLAY MEJORADO
+        toggleFormBlocking(true);
+        
+        if (btn) { 
+            btn.textContent = 'Enviando...';
+        }
 
         try {
-            // MANTENER: Tu lógica de envío existente
             const body = new URLSearchParams(formData);
             const res = await fetch(WEB_APP_URL, { method: 'POST', body });
             const txt = await res.text();
@@ -587,34 +873,41 @@ document.addEventListener('DOMContentLoaded', () => {
                 ok = !!json.ok;
             } catch (_) { }
 
-            // Abrir modal con el resultado
-            const modalBody = document.getElementById("statusModalBody");
+            // ✅ DESBLOQUEAR ANTES DE MOSTRAR RESULTADO
+            toggleFormBlocking(false);
 
+            // ✅ MOSTRAR MENSAJE EN LA PÁGINA EN LUGAR DE MODAL
             if (ok) {
-                modalBody.innerHTML =
-                    '<span>✅ ¡Confirmación registrada exitosamente! Se envió un email de confirmación a los novios.</span>';
+               let successMessage = '';
+                if (isAttending === true) {
+                    successMessage = '¡Confirmación registrada exitosamente! Se envió un email de confirmación a los novios. ¡Gracias!';
+                } else {
+                    successMessage = '¡Tu mensaje ha sido enviado a los novios! Se envió un email con tus saludos. ¡Gracias!';
+                }
+                
+                showResultMessage('success', successMessage);
+                
+                // ✅ RESETEAR FORMULARIO Y ESTADO CORRECTAMENTE
+                resetFormAndState();
+                
             } else {
-                modalBody.innerHTML =
-                    '<span>⚠️ No pudimos guardar tu confirmación. Intenta de nuevo.</span>';
+                showResultMessage('error', 
+                    'No pudimos guardar tu confirmación. Por favor intenta de nuevo en unos momentos.'
+                );
             }
-
-            // Mostrar el modal
-            const modal = new bootstrap.Modal(document.getElementById('statusModal'));
-            modal.show();
 
         } catch (err) {
             console.error(err);
+            toggleFormBlocking(false);
 
-            const modalBody = document.getElementById("statusModalBody");
-            modalBody.innerHTML =
-                '<span>❌ Hubo un problema al enviar. Intenta nuevamente.</span>';
-
-            const modal = new bootstrap.Modal(document.getElementById('statusModal'));
-            modal.show();
+            showResultMessage('error', 
+                'Hubo un problema al enviar tu confirmación. Verifica tu conexión e intenta nuevamente.'
+            );
 
         } finally {
+            toggleFormBlocking(false);
+            
             if (btn) {
-                btn.disabled = false;
                 btn.textContent = isAttending
                     ? 'CONFIRMAR ASISTENCIA'
                     : 'ENVIAR FELICITACIONES';
@@ -622,6 +915,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // ✅ Actualizar visual al cargar la página
+    updateAttendanceVisual();
+    
     // Inicializar contador
-    updateCounter();
+    if (typeof updateCounter === 'function') updateCounter();
 });

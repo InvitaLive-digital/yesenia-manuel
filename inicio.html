@@ -440,7 +440,6 @@
                         <div id="guestFieldsContainer">
                             <!-- Los campos se generan aquí dinámicamente -->
                         </div>
-
                         <!-- Campo de mensaje (aparece siempre) -->
                         <div class="form-group" id="messageSection">
                             <textarea name="nota" class="form-control  py-2 px-3" rows="5"
@@ -456,7 +455,9 @@
                                 CONFIRMAR ASISTENCIA
                             </button>
                         </div>
-                        <div id="rsvpStatus" class="mt-3 small"></div>
+                        <div id="resultMessage" class="mt-2">
+                            <!-- Los mensajes aparecerán aquí dinámicamente -->
+                        </div>
                     </form>
                 </div>
             </div>
@@ -484,21 +485,7 @@
             </div>
         </div>
     </div>
-    <div class="modal fade" id="statusModal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content" style="border-radius: 15px;">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">
-                        <span>&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body text-center" id="statusModalBody">
 
-                    <!-- Aquí insertamos el mensaje dinámicamente -->
-                </div>
-            </div>
-        </div>
-    </div>
     <!-- Footer Start -->
     <div class="container-fluid bg-dark text-white py-5 animate-on-scroll" id="contact">
         <div class="container text-center py-5">
@@ -521,6 +508,38 @@
         </div>
     </div>
     <!-- Footer End -->
+
+
+    <!-- ✅ OVERLAY TEMÁTICO DE BODA -->
+    <div id="loadingOverlay" style="display: none;">
+        <div class="wedding-loading-content">
+            <!-- Opción 1: Corazones girando -->
+            <div class="wedding-spinner-hearts">
+                <div class="heart heart-1">💕</div>
+                <div class="heart heart-2">💖</div>
+                <div class="heart heart-3">💝</div>
+            </div>
+
+            <!-- Opción 2: Anillos girando (alternativa) -->
+            <!-- <div class="wedding-spinner-rings">
+            <div class="ring ring-1">💍</div>
+            <div class="ring ring-2">💎</div>
+        </div> -->
+
+            <!-- Opción 3: Flores flotando (alternativa) -->
+            <!-- <div class="wedding-spinner-flowers">
+            <div class="flower flower-1">🌸</div>
+            <div class="flower flower-2">🌺</div>
+            <div class="flower flower-3">🌹</div>
+            <div class="flower flower-4">💐</div>
+        </div> -->
+
+            <div class="wedding-message">
+                <p>Enviando tu confirmación...</p>
+                <small>✨ Un momento por favor ✨</small>
+            </div>
+        </div>
+    </div>
 
 
     <!-- Scroll to Bottom -->
