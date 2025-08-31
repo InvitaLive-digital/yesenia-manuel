@@ -921,3 +921,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Inicializar contador
     if (typeof updateCounter === 'function') updateCounter();
 });
+
+function toggleSeccion(tipo) {
+    const seccion = document.getElementById('seccion-' + tipo);
+    
+    // Si la sección ya está visible, la ocultamos
+    if (seccion.style.display === 'block') {
+        seccion.style.display = 'none';
+    } else {
+        // Ocultamos todas las secciones primero
+        document.getElementById('seccion-cuentas').style.display = 'none';
+        
+        // Mostramos la sección seleccionada
+        seccion.style.display = 'block';
+    }
+}

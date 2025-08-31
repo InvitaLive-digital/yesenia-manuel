@@ -279,25 +279,59 @@
                     </div>
                     <br>
                 </div>
-                <div class="col-md-12 mt-4 ">
-                    <div class=" position-relative text-center animate-on-scroll">
+                <div class="col-md-12 mt-4">
+                    <div class="position-relative text-center animate-on-scroll">
                         <img class="img-fluid mb-4 icon-title" src="img/regalos.png" alt="" style="max-height: 100px;">
                         <p class="title-section">Regalos</p>
                     </div>
+
                     <div class="text-center justify-content-center mr-md-3 mb-4 mb-md-0 animate-on-scroll">
                         <p class="mb-2 text-black text-center"> ✨ Tu presencia es nuestro mayor regalo, pero si deseas
                             hacernos un regalo lo recibiremos con mucho cariño.</p>
                         <div id="seccion-lista" style="display: none;">
-                            <p class="mb-2 text-black text-center">
-                                Hemos preparado una lista de regalos que puedes consultar y elegir con facilidad:
-                            </p>
-                            <br>
-                            <a href="https://www.noviosfalabella.com.pe/public/resultadoBusquedaNovios.do?radTipoBusqueda=1&txtBusqueda=720954-01"
-                                target="_blank" class="btn btn-secondary font-weight-bold px-5">LISTA DE REGALOS</a>
+
+                            <!-- BOTONES FUERA DE LAS SECCIONES -->
+                            <div class="mb-3">
+                                <a href="https://www.noviosfalabella.com.pe/public/resultadoBusquedaNovios.do?radTipoBusqueda=1&txtBusqueda=720954-01"
+                                    target="_blank" class="btn btn-secondary font-weight-bold px-5  mt-2">VER LISTA</a>
+                                <button onclick="toggleSeccion('cuentas')"
+                                    class="btn btn-secondary font-weight-bold px-4 mt-2">CUENTA BANCARIA</button>
+                            </div>
+                            <!-- Sección Cuenta Bancaria -->
+                            <div id="seccion-cuentas" style="display: none;" class="mt-4">
+
+                                <p class="mb-3 text-black text-center">
+                                    Hemos preparado opciones para que puedas elegir la forma más conveniente para ti:
+                                </p>
+                                <div class="row justify-content-center">
+                                    <div class="col-md-5 mb-3">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <h6 class="card-title">💳 Interbank</h6>
+                                                <p class="mb-1"><strong>Titular:</strong> Yesenia Balbin</p>
+                                                <p class="mb-1"><strong>Cuenta:</strong> <span id="cuenta-interbank">163
+                                                        3140932556</span></p>
+                                                <p class="mb-3"><strong>CCI:</strong> <span
+                                                        id="cci-interbank">00316301314093255633</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-5 mb-3">
+                                        <div class="card">
+                                            <div class="card-body text-center">
+                                                <h6 class="card-title">📱 Plin</h6>
+                                                <p class="mb-3"><strong>Número:</strong> <span
+                                                        id="plin-numero">978276438</span></p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <br>
                 </div>
+
                 <div class="col-md-12 mt-4">
                     <div class=" position-relative text-center animate-on-scroll">
                         <img class="img-fluid mb-4 icon-title" src="img/video.png" alt="" style="max-height: 100px;">
